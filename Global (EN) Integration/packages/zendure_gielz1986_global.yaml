@@ -140,7 +140,7 @@ input_number:
   zendure_setting_start_charging_at:
     name: Zendure Start Charging At
     icon: mdi:battery-plus-variant
-    min: -1000
+    min: -3000
     max: -80
     step: 1
     mode: box
@@ -159,7 +159,7 @@ input_number:
     name: Zendure Charge Buffer
     icon: mdi:arrow-expand-vertical
     min: 0
-    max: 250
+    max: 2500
     step: 1
     mode: box
     unit_of_measurement: "W"

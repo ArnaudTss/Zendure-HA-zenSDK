@@ -462,6 +462,21 @@ template:
          {{ states('sensor.homewizard_p1_power') | float(0) }}
          {% endif %}
 
+      - name: "Zendure Power Home Only"
+        unique_id: zendure_power_home_only
+        unit_of_measurement: "W"
+        state_class: measurement
+        device_class: power
+        state: >
+          {% set z = states('sensor.zendure_power') | float(0) %}
+          {% set o = [states('sensor.zendure_power_offgrid_outlet_1') | float(0), 0] | max %}
+          {% set pv_active = states('sensor.zendure_power_pv_total') | float(0) > 0 %}
+          {% if z < 0 and not pv_active %}
+            {{ [z + o, 0] | min }}
+          {% else %}
+            {{ z }}
+          {% endif %}
+
       - name: "Dynamic Nordpool"
         unique_id: dynamic_nordpool
         icon: mdi:cash

@@ -996,7 +996,7 @@ actions:
                 (states('input_number.zendure_setting_discharge_buffer') |
                 float(0)) %} {% set p1 =
                 states('sensor.home_energy_meter_power') | float(0) %}  {% set
-                zendure = states('sensor.zendure_power') | float(0) %}
+                zendure = states('sensor.zendure_power_home_only') | float(0) %}
 
                 {% set totaal = (p1 - zendure - correctie) * factor %} {% set
                 beperkt = [ [totaal, 0] | max, cap ] | min %}
@@ -1010,7 +1010,7 @@ actions:
                   {% set cap = states('input_number.zendure_setting_max_discharge_power') | float(0) %}
                   {% set correctie = -1 * (states('input_number.zendure_setting_discharge_buffer') | float(0)) %}
                   {% set p1 = states('sensor.home_energy_meter_power') | float(0) %} 
-                  {% set zendure = states('sensor.zendure_power') | float(0) %}
+                  {% set zendure = states('sensor.zendure_power_home_only') | float(0) %}
 
                   {% set totaal = (p1 - zendure - correctie) * factor %} {% set beperkt = [
                   [totaal, 0] | max, cap ] | min %} {{ beperkt | int }} watt —
@@ -1038,7 +1038,7 @@ actions:
             condition: template
             value_template: |-
               {% set factor = 1.00 %} {% set cap =
-                states('input_number.zendure_setting_max_discharge_power') | float(0) %} {% set correctie = -1 * (states('input_number.zendure_setting_discharge_buffer') | float(0)) %} {% set p1 = states('sensor.home_energy_meter_power') | float(0) %} {% set zendure = states('sensor.zendure_power') | float(0) %} {% set totaal = (p1 - zendure - correctie) * factor %} {% set beperkt = [ [totaal, 0] | max, cap ] | min %} {% set target = beperkt | int %} {% set huidig = states('sensor.zendure_set_discharge_power') | int(0) %} {{ huidig != target }}
+                states('input_number.zendure_setting_max_discharge_power') | float(0) %} {% set correctie = -1 * (states('input_number.zendure_setting_discharge_buffer') | float(0)) %} {% set p1 = states('sensor.home_energy_meter_power') | float(0) %} {% set zendure = states('sensor.zendure_power_home_only') | float(0) %} {% set totaal = (p1 - zendure - correctie) * factor %} {% set beperkt = [ [totaal, 0] | max, cap ] | min %} {% set target = beperkt | int %} {% set huidig = states('sensor.zendure_set_discharge_power') | int(0) %} {{ huidig != target }}
           - condition: numeric_state
             entity_id: sensor.zendure_power
             below: 0
@@ -1105,7 +1105,7 @@ actions:
                 (states('input_number.zendure_setting_discharge_buffer') |
                 float(0)) %} {% set p1 =
                 states('sensor.home_energy_meter_power') | float(0) %}  {% set
-                zendure = states('sensor.zendure_power') | float(0) %}
+                zendure = states('sensor.zendure_power_home_only') | float(0) %}
 
                 {% set totaal = (p1 - zendure - correctie) * factor %} {% set
                 beperkt = [ [totaal, 0] | max, cap ] | min %} {{ beperkt | int
@@ -1118,7 +1118,7 @@ actions:
                   {% set cap = states('input_number.zendure_setting_max_discharge_power') | float(0) %}
                   {% set correctie = -1 * (states('input_number.zendure_setting_discharge_buffer') | float(0)) %}
                   {% set p1 = states('sensor.home_energy_meter_power') | float(0) %} 
-                  {% set zendure = states('sensor.zendure_power') | float(0) %}
+                  {% set zendure = states('sensor.zendure_power_home_only') | float(0) %}
 
                   {% set totaal = (p1 - zendure - correctie) * factor %} {% set beperkt = [
                   [totaal, 0] | max, cap ] | min %} {{ beperkt | int }} watt —
